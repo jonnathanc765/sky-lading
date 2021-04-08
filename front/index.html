@@ -5258,7 +5258,7 @@
 			$("#Form").on('submit', function(event) {
 			event.preventDefault();
 			let form = this;
-		    var formData = $(this).serialize();
+		        var formData = $(this).serialize();
  
 
 
@@ -5266,7 +5266,6 @@
 			let btn = document.querySelector('#botonEnviar');
 			loading.style.display = "block";
 			btn.disabled = true;
-
 
 			$.ajax({
 				url: 'https://apialiado.skylubricantes.com/api/contacts/store',
@@ -5293,10 +5292,13 @@
 
 				},
 				error: function (xhr, status, error) {
-					loading.style.display = "none";
+					setTimeout(function(){
+						loading.style.display = "none";
+						btn.disabled = false;
+					}, 10000);
 					var message = "<p style='font-size: 19px;font-weight: 700;color: #851212;line-height: 27px;'>Correo Electrónico o Teléfono en uso</p>";  
 					$('.errors').html(message); 
-					btn.disabled = false;
+					
 				}
 			
 			});
