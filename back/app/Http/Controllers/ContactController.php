@@ -21,7 +21,7 @@ class ContactController extends Controller
 
         $data = $request->validate([
             'nombre'      => '',
-            'email'     => '',
+            'email'     => 'nullable|unique:contacts,email',
             'telefono'     => '',
             'rif'       => '',
             'ciudad'      => '',
@@ -29,7 +29,7 @@ class ContactController extends Controller
         ]);
 
         // dd($request);
-
+        
         Contact::create([
             'name' => $data['nombre'],
             'email' => $data['email'],
@@ -38,7 +38,7 @@ class ContactController extends Controller
             'state' => $data['estado'],
             'city' => $data['ciudad']
         ]);
-
-        return response()->json($data, 201);
+        
+      
     }
 }
