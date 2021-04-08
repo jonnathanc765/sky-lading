@@ -5269,7 +5269,7 @@
 
 
 			var loading = document.querySelector('#Form .card-animation');
-			let btn = document.querySelector('#botonEnviar');
+			var btn = document.querySelector('#botonEnviar');
 			loading.style.display = "block";
 			btn.disabled = true;
 
@@ -5298,13 +5298,10 @@
 
 				},
 				error: function (xhr, status, error) {
-					setTimeout(function(){
-						loading.style.display = "none";
-						btn.disabled = false;
-					}, 10000);
+					loading.style.display = "none";
+					btn.disabled = false;
 					var message = "<p style='font-size: 19px;font-weight: 700;color: #851212;line-height: 27px;'>Correo Electrónico o Teléfono en uso</p>";  
-					$('.errors').html(message); 
-					
+					$('.errors').html(message);
 				}
 			
 			});
