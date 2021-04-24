@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Mail\ClientMail;
-use App\Mail\ProviderMail;
 use App\Contact;
-use Mail;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\RegisterReceived;
+
 
 class ContactController extends Controller
 {
@@ -30,7 +30,7 @@ class ContactController extends Controller
 
         // dd($request);
         
-        Contact::create([
+        $contact = Contact::create([
             'name' => $data['nombre'],
             'email' => $data['email'],
             'phone' => $data['telefono'],
@@ -38,7 +38,12 @@ class ContactController extends Controller
             'state' => $data['estado'],
             'city' => $data['ciudad']
         ]);
-        
+
+    $status = Mail::to('jorbinogales@gmail.com')->send(new RegisterReceived());
+
+    return response()->json([
+            'contact'                  => $contact,
+        ], 201);
       
     }
 }
