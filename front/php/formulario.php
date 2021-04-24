@@ -31,7 +31,6 @@ if ($estado=="Aragua" || $estado=="Carabobo" || $estado=="Distrito Federal" || $
  $zona = 'Centro';
 }
 
-$enviado == null;
 
 if ($zona == "Centro") {
   $to      = 'dramirez@keystone.net.ve';
