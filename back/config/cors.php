@@ -16,7 +16,7 @@ return [
     | all methods / origins / headers are allowed.
     |
     */
-    'paths' => ['api/*'],
+    // 'paths' => ['api/*'],
 
     /*
      * You can enable CORS for 1 or multiple paths.
@@ -37,7 +37,7 @@ return [
     /*
      * Patterns that can be used with `preg_match` to match the origin.
      */
-    'allowed_origins_patterns' => [],
+    'allowed_origins_patterns' => ['*'],
 
     /*
      * Sets the Access-Control-Allow-Headers response header. `[*]` allows all headers.
