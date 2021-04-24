@@ -28,9 +28,8 @@ class ContactController extends Controller
             'estado'     => '',
         ]);
 
-        // dd($request);
-        
-        Contact::create([
+
+        return Contact::create([
             'name' => $data['nombre'],
             'email' => $data['email'],
             'phone' => $data['telefono'],
@@ -38,7 +37,6 @@ class ContactController extends Controller
             'state' => $data['estado'],
             'city' => $data['ciudad']
         ]);
-        
-      
+
     }
 }

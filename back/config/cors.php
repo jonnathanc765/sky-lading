@@ -15,7 +15,8 @@ return [
     | If array('*') is provided to allowed_methods, allowed_origins or allowed_headers
     | all methods / origins / headers are allowed.
     |
-    */'paths' => ['api/*'],
+    */
+    'paths' => ['api/*'],
 
     /*
      * You can enable CORS for 1 or multiple paths.
@@ -28,7 +29,7 @@ return [
     */
     'allowed_methods' => ['*'],
 
-    /*
+    /*s
      * Matches the request origin. `[*]` allows all origins. Wildcards can be used, eg `*.mydomain.com`
      */
     'allowed_origins' => ['*'],
