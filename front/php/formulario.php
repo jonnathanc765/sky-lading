@@ -1,9 +1,20 @@
 <?php
 
+
 use PHPMailer\PHPMailer\PHPMailer;
 
 require_once './../vendor/autoload.php';
 
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
+
+$email_username = $_SERVER['MAIL_USERNAME'];
+$email_password = $_SERVER['MAIL_PASSWORD'];
+
+$credentials = [
+  'username' => $email_username,
+  'password' => $email_password
+];
 
 if (isset($_POST['email'])) {
     $nombre = $_POST['nombre'];
@@ -48,15 +59,13 @@ $Body .= "Ciudad: <br>";
 $Body .= $ciudad."<br>";
 $Body .= "Zona: <br>";
 $Body .= $zona."<br>";
-$Body .= "Comunícate con tu cliente lo antes posible para duplicar las posibilidades de vender y que sienta atendido."; 
+$Body .= "Comunícate con tu cliente lo antes posible para duplicar las posibilidades de vender y que sienta atendido.";
 
-$enviado = mail($to, $subject, $Body, $headers);
+$enviado = sendMail($to, $subject, $Body, $credentials);
 
 if($enviado){
 echo json_encode(['success'=>true]); }
 else{ echo json_encode(['success'=>false]);}
-    
-
 }
 
 
@@ -77,13 +86,13 @@ $Body .= "Ciudad: <br>";
 $Body .= $ciudad."<br>";
 $Body .= "Zona: <br>";
 $Body .= $zona."<br>";
-$Body .= "Comunícate con tu cliente lo antes posible para duplicar las posibilidades de vender y que sienta atendido."; 
+$Body .= "Comunícate con tu cliente lo antes posible para duplicar las posibilidades de vender y que sienta atendido.";
 
-$enviado = sendMail($to, $subject, $Body);
+$enviado = sendMail($to, $subject, $Body, $credentials);
 
   if ($enviado) {
-    echo json_encode(['success'=>true]); 
-  } else { 
+    echo json_encode(['success'=>true]);
+  } else {
     echo json_encode(['success'=>false]);
   }
 }
@@ -107,14 +116,14 @@ $Body .= $ciudad."<br>";
 $Body .= "Zona: <br>";
 $Body .= $zona."<br>";
 
-$Body .= "Comunícate con tu cliente lo antes posible para duplicar las posibilidades de vender y que sienta atendido."; 
+$Body .= "Comunícate con tu cliente lo antes posible para duplicar las posibilidades de vender y que sienta atendido.";
 
-$enviado = sendMail($to, $subject, $Body);
+$enviado = sendMail($to, $subject, $Body, $credentials);
 
 if($enviado){
 echo json_encode(['success'=>true]); }
 else{ echo json_encode(['success'=>false]);}
-   
+
 
 }
 
@@ -138,39 +147,39 @@ if ($zona == "Centro-occidente") {
   $Body .= $ciudad."<br>";
   $Body .= "Zona: <br>";
   $Body .= $zona."<br>";
-  $Body .= "Comunícate con tu cliente lo antes posible para duplicar las posibilidades de vender y que sienta atendido."; 
-  $enviado = sendMail($to, $subject, $Body);
+  $Body .= "Comunícate con tu cliente lo antes posible para duplicar las posibilidades de vender y que sienta atendido.";
+  $enviado = sendMail($to, $subject, $Body, $credentials);
 
   if($enviado){
-    echo json_encode(['success'=>true]); 
+    echo json_encode(['success'=>true]);
   } else {
     echo json_encode(['success'=>false]);
   }
-   
+
 
 }
-    
-    
-  $to = $email;  
-      $subject = "Informacion de Sky lubricantes"; 
+
+
+  $to = $email;
+      $subject = "Informacion de Sky lubricantes";
   $Body = "¡Hola! ".$nombre.",<br>";
 
   $Body .= "Falta poco para que te conviertas en un aliado comercial de Sky Lubricantes.<br>";
 
   $Body .= "En los próximos días el Distribuidor de tu zona se comunicará contigo al teléfono de agregaste en el formulario,
-  para acordar los detalles de tu solicitud.<br>";  
+  para acordar los detalles de tu solicitud.<br>";
 
   $Body .= "Para más información entra en nuestra web skylubricantes.com
-  Si deseas compartir el link para que amigos o aliados se registren, lo puedes hacer aquí aliado.skylubricantes.com/<br>";    
-    
-    
+  Si deseas compartir el link para que amigos o aliados se registren, lo puedes hacer aquí aliado.skylubricantes.com/<br>";
 
-   $enviado = sendMail($to, $subject, $Body);
+
+
+   $enviado = sendMail($to, $subject, $Body, $credentials);
 
 }
 
 
-  function sendMail($to, $subject, $Body) {
+  function sendMail($to, $subject, $Body, $credentials) {
 
     $mail = new PHPMailer();
 
@@ -178,13 +187,13 @@ if ($zona == "Centro-occidente") {
     $mail->IsSMTP();
     $mail->CharSet = 'UTF-8';
 
-    $mail->setFrom('info@skylubricantes.com', 'Sky Lubricantes');
+    $mail->setFrom($credentials['username'], 'Sky Lubricantes');
     $mail->Host       = "smtp.zoho.com"; // SMTP server example
     $mail->SMTPDebug  = 1;                     // enables SMTP debug information (for testing)
     $mail->SMTPAuth   = true;                  // enable SMTP authentication
     $mail->Port       = 465;                    // set the SMTP port for the GMAIL server
-    $mail->Username   = "info@skylubricantes.com"; // SMTP account username example
-    $mail->Password   = "Sky.lubricantes2020";        // SMTP account password example
+    $mail->Username   = $credentials['username']; // SMTP account username example
+    $mail->Password   = $credentials['password'];        // SMTP account password example
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
     $mail->addAddress($to);
 
@@ -197,7 +206,7 @@ if ($zona == "Centro-occidente") {
     // print_r($mail);
     // die();
 
-    $mail->send();
+    return $mail->send();
 
   }
 
