@@ -2627,6 +2627,7 @@
 				data: formData,
 				method:'POST',
 				success: function(response) { 
+
 					$.ajax({
 						type: 'POST',
 						url: 'php/formulario.php',
@@ -2638,20 +2639,16 @@
 							btn.disabled = false;
 						},
 						error: function (xhr, status, error){
-							console.log(status);
-							console.log(error);
 							var message = "<p style='font-size: 19px;font-weight: 700;color: #851212;line-height: 27px;'>Tu mensaje no fue enviado</p>";  
 							$('.errors').html(message); 
 							btn.disabled = false;
 						}
 					});
-
+					
 
 				},
 				error: function (xhr, status, error) {
 					loading.style.display = "none";
-					console.log(status);
-					console.log(error);
 					var message = "<p style='font-size: 19px;font-weight: 700;color: #851212;line-height: 27px;'>Correo Electrónico o Teléfono en uso</p>";  
 					$('.errors').html(message); 
 					btn.disabled = false;
