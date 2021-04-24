@@ -52,7 +52,7 @@ if ($zona == "Centro") {
   $Body .= $zona."<br>";
   $Body .= "Comunícate con tu cliente lo antes posible para duplicar las posibilidades de vender y que sienta atendido."; 
 
-// $enviado = mail($to, $subject, $Body, $headers);
+$enviado = mail($to, $subject, $Body, $headers);
 
 if($enviado){
 echo json_encode(['success'=>true]); }
@@ -81,7 +81,7 @@ $Body .= "Zona: <br>";
 $Body .= $zona."<br>";
 $Body .= "Comunícate con tu cliente lo antes posible para duplicar las posibilidades de vender y que sienta atendido."; 
 
-// $enviado = sendMail($to, $subject, $Body);
+$enviado = sendMail($to, $subject, $Body);
 
   if ($enviado) {
     echo json_encode(['success'=>true]); 
@@ -111,7 +111,7 @@ $Body .= $zona."<br>";
 
 $Body .= "Comunícate con tu cliente lo antes posible para duplicar las posibilidades de vender y que sienta atendido."; 
 
-// $enviado = sendMail($to, $subject, $Body);
+$enviado = sendMail($to, $subject, $Body);
 
 if($enviado){
 echo json_encode(['success'=>true]); }
@@ -166,7 +166,7 @@ if ($zona == "Centro-occidente") {
     
     
 
-  // $enviado = sendMail($to, $subject, $Body);
+  $enviado = sendMail($to, $subject, $Body);
 
 }
 
