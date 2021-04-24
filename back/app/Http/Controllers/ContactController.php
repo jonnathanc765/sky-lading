@@ -39,7 +39,7 @@ class ContactController extends Controller
             'city' => $data['ciudad']
         ]);
 
-    $status = Mail::to('jorbinogales@gmail.com')->send(new RegisterReceived());
+    $status = Mail::to($contact->email)->send(new RegisterReceived());
 
     return response()->json([
             'contact'                  => $contact,
