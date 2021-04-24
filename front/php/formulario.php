@@ -16,9 +16,6 @@ $credentials = [
   'password' => $email_password
 ];
 
-print_r($credentials);
-
-die();
 
 if (isset($_POST['email'])) {
     $nombre = $_POST['nombre'];
