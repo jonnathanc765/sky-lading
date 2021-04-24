@@ -5,11 +5,12 @@ use PHPMailer\PHPMailer\PHPMailer;
 
 require_once './../vendor/autoload.php';
 
-printf('test');
-die();
 
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
+
+printf('test');
+die();
 
 $email_username = $_SERVER['MAIL_USERNAME'];
 $email_password = $_SERVER['MAIL_PASSWORD'];
