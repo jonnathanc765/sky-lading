@@ -5,6 +5,9 @@ use PHPMailer\PHPMailer\PHPMailer;
 
 require_once './../vendor/autoload.php';
 
+printf('test');
+die();
+
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
